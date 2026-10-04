@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>矿物对决 · 切割与神话武器</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div id="app">
+
+  <!-- 顶部：对手主晶 -->
+  <header class="core-bar opponent">
+    <div class="core-info">
+      <div class="core-name">对手主晶</div>
+      <div class="core-hp"><span id="ai-hp">30</span><small>/30</small><span id="ai-shield" class="shield hidden">+0</span></div>
+    </div>
+    <div class="deck-pile"><span class="deck-icon"></span><span id="ai-deck">牌库 0</span></div>
+  </header>
+
+  <!-- 对手：武器槽 + 宝石栏 -->
+  <section class="field opponent" id="ai-field"></section>
+
+  <div class="divider"><span id="turn-banner">你的回合</span></div>
+
+  <!-- 玩家：武器槽 + 宝石栏 -->
+  <section class="field player" id="player-field"></section>
+
+  <!-- 底部：玩家主晶 / 每回合次数 / 操作 -->
+  <footer class="core-bar player">
+    <div class="core-info">
+      <div class="core-name">你的主晶</div>
+      <div class="core-hp"><span id="player-hp">30</span><small>/30</small><span id="player-shield" class="shield hidden">+0</span></div>
+    </div>
+    <div class="limit-box" id="player-limits"></div>
+    <div class="deck-pile"><span class="deck-icon"></span><span id="player-deck">牌库 0</span></div>
+    <div class="acts">
+      <button id="attack-btn" class="btn-primary">武器攻击</button>
+      <button id="end-turn-btn" class="btn-primary">结束回合</button>
+      <button id="restart-btn" class="btn-ghost">重开一局</button>
+    </div>
+  </footer>
+
+  <!-- 玩家手牌 -->
+  <section id="player-hand" class="hand"></section>
+
+  <!-- 卡牌操作条 -->
+  <div id="card-actions" class="card-actions hidden"></div>
+
+  <!-- 战斗日志 -->
+  <aside id="log" class="log"></aside>
+
+  <!-- 结算遮罩 -->
+  <div id="overlay" class="overlay hidden">
+    <div class="overlay-card">
+      <h1 id="overlay-title">胜利</h1>
+      <p id="overlay-sub"></p>
+      <button id="overlay-btn" class="btn-primary">再来一局</button>
+    </div>
+  </div>
+
+  <!-- 替换武器确认 -->
+  <div id="confirm" class="overlay hidden">
+    <div class="overlay-card confirm">
+      <h2>替换武器？</h2>
+      <p id="confirm-sub"></p>
+      <div class="confirm-acts">
+        <button id="confirm-yes" class="btn-primary">替换</button>
+        <button id="confirm-no" class="btn-ghost">取消</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 联机大厅 -->
+  <div id="lobby" class="overlay">
+    <div class="overlay-card lobby">
+      <h1>矿物对决</h1>
+      <p class="lobby-sub">选择对战方式</p>
+      <div id="lobby-menu" class="lobby-menu">
+        <button id="lobby-solo" class="btn-primary">单人对战</button>
+        <button id="lobby-create" class="btn-primary">创建房间</button>
+        <div class="lobby-join">
+          <input id="lobby-code" class="lobby-input" maxlength="6" placeholder="输入房间码" autocomplete="off">
+          <button id="lobby-join-btn" class="btn-ghost">加入房间</button>
+        </div>
+      </div>
+      <div id="lobby-room" class="lobby-room hidden">
+        <div class="lobby-label">把房间码发给对手</div>
+        <div id="lobby-code-show" class="lobby-code">----</div>
+      </div>
+      <div id="lobby-status" class="lobby-status"></div>
+    </div>
+  </div>
+
+</div>
+<div id="net-status" class="net-status hidden"></div>
+<script src="net.js"></script>
+<script src="game.js"></script>
+</body>
+</html>
